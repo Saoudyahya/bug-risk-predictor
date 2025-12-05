@@ -1,0 +1,88 @@
+# Byte-compiled / optimized / DLL files
+__pycache__/
+*.py[cod]
+*$py.class
+
+# C extensions
+*.so
+*.pyd
+*.dll
+
+# Distribution / packaging
+build/
+dist/
+eggs/
+*.egg
+*.egg-info/
+.installed.cfg
+pip-wheel-metadata/
+wheelhouse/
+*.whl
+
+# Virtual environments
+venv/
+ENV/
+env/
+.venv/
+venv.bak/
+env.bak/
+data/
+# Environment / secrets
+.env
+.env.*
+secrets.*
+.credentials
+*.key
+
+# PyCharm / JetBrains
+.idea/
+*.iml
+workspace.xml
+# Uncomment if you want to keep some project-level settings:
+# .idea/fileTemplates
+# .idea/inspectionProfiles
+
+# VS Code (if present)
+.vscode/
+
+# Testing / caches
+.pytest_cache/
+.tox/
+.nox/
+.cache/
+.mypy_cache/
+
+# Coverage reports
+.coverage
+.coverage.*
+coverage.xml
+htmlcov/
+
+# Jupyter
+.ipynb_checkpoints
+
+# Documentation build
+docs/_build/
+
+# Logs and reports
+*.log
+reports/
+
+# Database
+*.sqlite3
+*.db
+
+# OS files
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# Editor/temp files
+*~
+*.swp
+*.swo
+
+# Misc
+pip-log.txt
+pip-delete-this-directory.txt
+.ropeproject/
