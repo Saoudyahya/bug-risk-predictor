@@ -1,0 +1,37 @@
+# Core Dependencies
+numpy
+pandas
+scikit-learn
+
+# Deep Learning
+tensorflow
+keras
+
+# Data Visualization
+matplotlib
+seaborn
+# Imbalanced Learning
+imbalanced-learn
+# Web Framework
+fastapi
+uvicorn
+python-multipart
+
+# HTTP Client
+httpx
+requests
+
+# Model Optimization
+optuna
+
+# Job Serialization
+joblib
+
+# Data Validation
+pydantic
+
+# Progress Bars
+tqdm
+
+# Type Hints
+typing-extensions
