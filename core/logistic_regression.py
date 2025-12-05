@@ -6,7 +6,7 @@ import numpy as np
 from typing import Dict, Any, Optional
 from sklearn.linear_model import LogisticRegression
 from sklearn.preprocessing import StandardScaler
-from core.model import BaseModel
+from models.model import BaseModel
 
 
 class LogisticRegressionModel(BaseModel):

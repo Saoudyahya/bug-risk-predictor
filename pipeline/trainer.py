@@ -6,19 +6,17 @@ import sys
 import os
 sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 
-import numpy as np
 import pandas as pd
 from pathlib import Path
 from typing import Dict, List, Optional
 import argparse
 from sklearn.model_selection import train_test_split
-from sklearn.ensemble import RandomForestClassifier, GradientBoostingClassifier
+from sklearn.ensemble import RandomForestClassifier
 import joblib
 
 from core.dataset import BugDataset
 from core.logistic_regression import LogisticRegressionModel
 from core.neural_network import NeuralNetworkModel
-from core.model import EnsembleModel
 from utils.preprocessing import DataPreprocessor
 from utils.metrics import MetricsCalculator
 

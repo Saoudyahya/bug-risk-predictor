@@ -27,6 +27,9 @@ env/
 venv.bak/
 env.bak/
 data/
+models/logistic_regression_model.pkl
+models/neural_network_model.pkl
+models/random_forest_model.pkl
 # Environment / secrets
 .env
 .env.*
