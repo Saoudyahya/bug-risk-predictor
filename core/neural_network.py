@@ -8,7 +8,7 @@ import tensorflow as tf
 from tensorflow import keras
 from tensorflow.keras import layers
 from sklearn.preprocessing import StandardScaler
-from core.model import BaseModel
+from models.model import BaseModel
 
 
 class NeuralNetworkModel(BaseModel):
