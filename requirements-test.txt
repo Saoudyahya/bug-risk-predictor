@@ -1,0 +1,21 @@
+# Testing Dependencies
+pytest
+pytest-cov
+pytest-html
+pytest-xdist # For parallel test execution
+pytest-mock
+pytest-timeout
+pytest-asyncio
+
+# Coverage reporting
+coverage
+coverage-badge
+
+# API testing
+httpx>=0.24.0
+requests>=2.31.0
+
+# Additional testing utilities
+faker>=19.0.0  # For generating fake data
+freezegun>=1.2.2  # For mocking datetime
+responses>=0.23.0  # For mocking HTTP requests
