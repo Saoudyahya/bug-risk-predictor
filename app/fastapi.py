@@ -17,6 +17,7 @@ from pathlib import Path
 import io
 
 from pipeline.evaluator import ModelEvaluator
+from app.code_analyzer import analyze_code, CodeAnalysisRequest
 
 from contextlib import asynccontextmanager
 
@@ -472,6 +473,72 @@ async def predict_and_download_csv(file: UploadFile = File(...)):
             io.BytesIO(output.getvalue().encode()),
             media_type="text/csv",
             headers={"Content-Disposition": "attachment; filename=bug_predictions.csv"}
+        )
+
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=str(e))
+
+
+@app.post("/predict/code", response_model=PredictionResponse, tags=["Prediction"])
+async def predict_from_code(request: CodeAnalysisRequest):
+    """
+    Analyze source code and predict bug risk
+
+    Args:
+        request: Code analysis request with source code
+
+    Returns:
+        PredictionResponse with bug prediction
+    """
+    if evaluator is None:
+        raise HTTPException(status_code=503, detail="Model not loaded")
+
+    try:
+        # Extract metrics from code
+        metrics = analyze_code(request.code, request.language)
+
+        # Get feature names
+        feature_names = None
+        if hasattr(evaluator.model, 'feature_names'):
+            feature_names = evaluator.model['feature_names']
+        elif isinstance(evaluator.model, dict) and 'feature_names' in evaluator.model:
+            feature_names = evaluator.model['feature_names']
+
+        # Make prediction
+        result = evaluator.predict_from_metrics(metrics, feature_names)
+
+        # Calculate confidence
+        confidence = None
+        if result['bug_probability'] is not None:
+            confidence = abs(result['bug_probability'] - 0.5) * 2
+
+        # Get top risk factors
+        top_risk_factors = None
+        if isinstance(evaluator.model, dict) and 'feature_importance' in evaluator.model and feature_names:
+            importance = evaluator.model['feature_importance']
+            top_indices = np.argsort(importance)[::-1][:5]
+
+            risk_factors = []
+            for idx in top_indices:
+                if idx < len(feature_names):
+                    feature = feature_names[idx]
+                    if feature in metrics:
+                        risk_factors.append({
+                            'metric': feature,
+                            'value': metrics[feature],
+                            'importance': float(importance[idx])
+                        })
+
+            top_risk_factors = risk_factors
+
+        return PredictionResponse(
+            file_name=request.file_name,
+            prediction=result['prediction'],
+            bug_probability=result.get('bug_probability'),
+            clean_probability=result.get('clean_probability'),
+            risk_level=result['risk_level'],
+            confidence=confidence,
+            top_risk_factors=top_risk_factors
         )
 
     except Exception as e:
